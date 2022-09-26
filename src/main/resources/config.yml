@@ -1,0 +1,12 @@
+# PersistentDataSync by Ehhthan
+# Sync player PersistentDataContainers between servers using sql.
+
+# These are the database credentials, make sure to change them.
+database:
+  host: 127.0.0.1
+  port: 3306
+  user: root
+  password: ''
+
+# How often should the plugin run an auto save?
+auto-save: 300

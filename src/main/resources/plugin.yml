@@ -1,0 +1,10 @@
+name: PersistentDataSync
+version: '${project.version}'
+main: com.ehhthan.persistentdatasync.PersistentDataSync
+api-version: 1.17
+prefix: PersistentDataSync
+authors: [ Ehhthan ]
+description: Sync player PersistentDataContainers between servers.
+website: ehhthan.com
+libraries:
+  - mysql:mysql-connector-java:8.0.30
