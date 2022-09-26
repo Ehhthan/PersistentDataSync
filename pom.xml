@@ -46,6 +46,10 @@
                                     <pattern>de.tr7zw.changeme.nbtapi</pattern>
                                     <shadedPattern>com.ehhthan.persistentdatasync.nbt</shadedPattern>
                                 </relocation>
+                                <relocation>
+                                    <pattern>org.bstats</pattern>
+                                    <shadedPattern>com.ehhthan.persistentdatasync.bstats</shadedPattern>
+                                </relocation>
                             </relocations>
                         </configuration>
                     </execution>
@@ -87,6 +91,12 @@
             <groupId>de.tr7zw</groupId>
             <artifactId>item-nbt-api</artifactId>
             <version>2.10.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>3.0.0</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

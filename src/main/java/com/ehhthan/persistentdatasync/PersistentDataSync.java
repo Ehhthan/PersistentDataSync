@@ -1,7 +1,7 @@
 package com.ehhthan.persistentdatasync;
 
-import com.ehhthan.persistentdatasync.comp.Metrics;
 import com.ehhthan.persistentdatasync.listener.PlayerListener;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,9 +15,11 @@ import java.util.function.Supplier;
  * Sync player PersistentDataContainers between servers using sql.
  * @author Ehhthan
  */
+@SuppressWarnings("unused")
 public final class PersistentDataSync extends JavaPlugin {
     private Syncer syncer;
 
+    // Supplies an updater task for each player.
     private final Supplier<BukkitRunnable> runnable = () -> new BukkitRunnable() {
         @Override
         public void run() {
@@ -43,11 +45,14 @@ public final class PersistentDataSync extends JavaPlugin {
             Bukkit.getPluginManager().disablePlugin(this);
         }
 
-        // Create auto save scheduler.
-        runnable.get().runTaskTimer(this, 1L, getConfig().getLong("auto-save", 300) * 20);
+        // Check if plugin is enabled before registering things.
+        if (Bukkit.getPluginManager().isPluginEnabled(this)) {
+            // Create auto save scheduler.
+            runnable.get().runTaskTimer(this, 1L, getConfig().getLong("auto-save", 300) * 20);
 
-        // Register player listener.
-        Bukkit.getPluginManager().registerEvents(new PlayerListener(syncer), this);
+            // Register player listener.
+            Bukkit.getPluginManager().registerEvents(new PlayerListener(syncer), this);
+        }
     }
 
     @Override

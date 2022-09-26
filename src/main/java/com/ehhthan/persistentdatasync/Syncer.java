@@ -2,7 +2,6 @@ package com.ehhthan.persistentdatasync;
 
 import de.tr7zw.changeme.nbtapi.NBTContainer;
 import de.tr7zw.changeme.nbtapi.NBTPersistentDataContainer;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
@@ -14,10 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Syncer {
-    // Name of the database
-    private final static String DATABASE_NAME = "persistent_data_sync";
     // Name of the table
-    private final static String TABLE_NAME = "data";
+    private final static String TABLE_NAME = "persistent_data_sync";
 
     // The main connection of the syncer.
     private static Connection CONNECTION;
@@ -39,15 +36,17 @@ public class Syncer {
         int port = database.getInt("port", 0);
         String user = database.getString("user", "");
         String password = database.getString("password", "");
+        String databaseName = database.getString("database-name", "");
 
         // Attempt to make a connection.
         CONNECTION = DriverManager.getConnection(String.format("jdbc:mysql://%s:%s", host, port), user, password);
 
         try (Statement statement = CONNECTION.createStatement()) {
             // Attempt to create the database if it already does not exist.
-            statement.execute(String.format("CREATE DATABASE IF NOT EXISTS %s;", DATABASE_NAME));
+            if (!statement.executeQuery(String.format("SHOW DATABASES LIKE '%s';", databaseName)).next())
+                statement.execute(String.format("CREATE DATABASE %s;", databaseName));
             // Select the correct database.
-            statement.execute(String.format("USE %s;", DATABASE_NAME));
+            statement.execute(String.format("USE %s;", databaseName));
             // Attempt to create the table if it already does not exist.
             statement.execute(String.format("CREATE TABLE IF NOT EXISTS %s (uuid VARCHAR(36) NOT NULL, container LONGTEXT, PRIMARY KEY (uuid));", TABLE_NAME));
         }
