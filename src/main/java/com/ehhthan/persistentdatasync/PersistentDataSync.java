@@ -1,5 +1,6 @@
 package com.ehhthan.persistentdatasync;
 
+import com.ehhthan.persistentdatasync.comp.Metrics;
 import com.ehhthan.persistentdatasync.listener.PlayerListener;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -30,6 +31,9 @@ public final class PersistentDataSync extends JavaPlugin {
     public void onEnable() {
         // Create default config if it doesn't exist.
         saveDefaultConfig();
+
+        // Create metrics.
+        new Metrics(this, 16506);
 
         // Create the syncer instance, if this fails so does the plugin.
         try {
