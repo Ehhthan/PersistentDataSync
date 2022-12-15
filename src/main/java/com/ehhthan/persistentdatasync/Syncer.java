@@ -37,9 +37,10 @@ public class Syncer {
         String user = database.getString("user", "");
         String password = database.getString("password", "");
         String databaseName = database.getString("database-name", "");
+        String arguments = database.getString("arguments", "?autoReconnect=true");
 
         // Attempt to make a connection.
-        CONNECTION = DriverManager.getConnection(String.format("jdbc:mysql://%s:%s?autoReconnect=true", host, port), user, password);
+        CONNECTION = DriverManager.getConnection(String.format("jdbc:mysql://%s:%s/%s%s", host, port, databaseName, arguments), user, password);
 
         try (Statement statement = CONNECTION.createStatement()) {
             // Attempt to create the database if it already does not exist.

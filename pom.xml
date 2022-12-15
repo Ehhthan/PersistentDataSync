@@ -6,7 +6,7 @@
 
     <groupId>PersistentDataSync</groupId>
     <artifactId>PersistentDataSync</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <packaging>jar</packaging>
 
     <name>PersistentDataSync</name>
@@ -107,7 +107,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.30</version>
+            <version>8.0.31</version>
             <scope>test</scope>
         </dependency>
 

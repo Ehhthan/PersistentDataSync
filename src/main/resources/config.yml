@@ -6,6 +6,7 @@ database:
   host: 127.0.0.1
   port: 3306
   database-name: "persistent_data_sync_database"
+  arguments: "?autoReconnect=true"
   user: root
   password: ''
 
